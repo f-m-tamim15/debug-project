@@ -29,7 +29,7 @@ const showImages = (images) => {
 }
 
 const getImages = (query) => {
-  toggleSpeneer();
+  // toggleSpeneer();
   fetch(`https://pixabay.com/api/?key=${KEY}=${query}&image_type=photo&pretty=true`)
     .then(response => response.json())
     .then(data => showImages(data.hits))
@@ -39,20 +39,21 @@ const getImages = (query) => {
 let slideIndex = 0;
 const selectItem = (event, img) => {
   let element = event.target;
+  let element2 = event.currentTarget
   element.classList.add('added');
-  // element.classList.remove('removed');
+  element2.classList.remove('removed');
+
 
  
   let item = sliders.indexOf(img);
   if (item === -1) {
     sliders.push(img);
   } else {
-    sliders.splice(sliders.indexOf(img));
-    console.log(sliders.splice(sliders.indexOf(img))  );
+    //  sliders.splice(sliders.indexOf(img));
   }
-  toggleSpeneer()
+  // toggleSpeneer()
 }
-var timer
+var timer;
 const createSlider = (img) => {
   // check slider image length
   if (sliders.length < 2) {
