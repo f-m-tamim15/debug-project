@@ -25,11 +25,12 @@ const showImages = (images) => {
     div.innerHTML = ` <img class="img-fluid img-thumbnail" onclick=selectItem(event,"${image.webformatURL}") src="${image.webformatURL}" alt="${image.tags}">`;
     gallery.appendChild(div);
   })
+  toggleSpeneer();
 
 }
 
 const getImages = (query) => {
-  // toggleSpeneer();
+
   fetch(`https://pixabay.com/api/?key=${KEY}=${query}&image_type=photo&pretty=true`)
     .then(response => response.json())
     .then(data => showImages(data.hits))
@@ -39,9 +40,8 @@ const getImages = (query) => {
 let slideIndex = 0;
 const selectItem = (event, img) => {
   let element = event.target;
-  let element2 = event.currentTarget
   element.classList.add('added');
-  element2.classList.remove('removed');
+  // element2.classList.remove('removed');
 
 
  
@@ -49,7 +49,12 @@ const selectItem = (event, img) => {
   if (item === -1) {
     sliders.push(img);
   } else {
-    //  sliders.splice(sliders.indexOf(img));
+
+     sliders.splice(sliders.indexOf(img),1);
+     console.log(sliders);
+     let element2 = event.target;
+     element2.classList.remove('added');
+
   }
   // toggleSpeneer()
 }
@@ -144,7 +149,10 @@ search.addEventListener("keypress",function (event){
   console.log('tamim');
 
   if(event.key === 'Enter'){
+
     document.getElementById("search-btn").click();
+    toggleSpeneer();
+
   }
 });
 
@@ -152,6 +160,6 @@ search.addEventListener("keypress",function (event){
 const toggleSpeneer = () => {
 const spineer = document.getElementById("loading-spineer");
 
-    spineer.classList.toggle()
+    spineer.classList.toggle("none");
 
 }
